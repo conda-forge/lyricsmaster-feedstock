@@ -1,8 +1,8 @@
 {% set name = "lyricsmaster" %}
-{% set version = "2.7.20" %}
+{% set version = "2.7.21" %}
 {% set file_ext = "tar.gz" %}
 {% set hash_type = "sha256" %}
-{% set hash_value = "2fc2e76443ca44fd284e594219dd51592d860e06d07a8343a247d73a00982927" %}
+{% set hash_value = "790362fa5d634b45f4f8ccb42ce27f0a82af584d833ae500e50ccaecb0839e97" %}
 
 package:
   name: '{{ name|lower }}'
