@@ -1,32 +1,29 @@
 {% set name = "lyricsmaster" %}
 {% set version = "2.8.1" %}
-{% set file_ext = "tar.gz" %}
-{% set hash_type = "sha256" %}
-{% set hash_value = "f85db623dd2b7681246b025e162c87e80ee81f285e20b733dc3bfe30214896f9" %}
 
 package:
   name: '{{ name|lower }}'
   version: '{{ version }}'
 
 source:
-  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
-  '{{ hash_type }}': '{{ hash_value }}'
+  fn: '{{ name }}-{{ version }}.tar.gz'
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  'sha256': 'f85db623dd2b7681246b025e162c87e80ee81f285e20b733dc3bfe30214896f9'
 
 build:
   noarch: python
-  number: 0
+  number: 1
   entry_points:
     - lyricsmaster=lyricsmaster.cli:main
-  script: python -m pip install --no-deps --ignore-installed .
+  script: {{ PYTHON }} -m pip install . --no-deps -vv
 
 requirements:
   host:
     - pip
     - pytest
-    - python
+    - python {{ python_min }}
   run:
-    - python
+    - python >={{ python_min }}
     - click >=6.0
     - lxml
     - beautifulsoup4
@@ -37,6 +34,8 @@ requirements:
     - certifi
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - lyricsmaster
   commands:
